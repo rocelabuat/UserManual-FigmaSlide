@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { Slide } from './components/Slide';
 import { SlideControls } from './components/SlideControls';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import slide1Dark from 'figma:asset/01962370c5547bd530de43592f323d732a6e84c0.png';
 import slide1Light from 'figma:asset/1352e0e6eee956e005b4d72a16c297d46d0c32e5.png';
@@ -21,9 +22,6 @@ import adminLogin from 'figma:asset/7dde59054d238ceed9f581f75ef03ded5a51385d.png
 import adminDashboard from 'figma:asset/9e1dd0e170fac69b57a329b267c09c04d31fea15.png';
 import adminSales from 'figma:asset/93fa7fb0c7d4ef1e64082c5c647c4b5b06464c4c.png';
 import adminMenuManagement from 'figma:asset/5b5771f736db019fd200f273271809fb38f00d62.png';
-import adminAddProduct from 'figma:asset/a2eca46b216ae3e23c31739ec542becb0c72f6d4.png';
-import adminInventory from 'figma:asset/572e4dfc0f6f77e10a5ce57699e24443ad350b38.png';
-import adminUpdateInventory from 'figma:asset/80fcf07e9b2c90e305694d59ce3c3c9c41ff76b4.png';
 import adminUserManagement from 'figma:asset/1d44f2611ed3f2a31af76b992b4c060db9b024f1.png';
 
 const slides = [
@@ -109,56 +107,35 @@ const slides = [
     title: "Admin Login",
     subtitle: "Admin Portal Access",
     image: adminLogin,
-    description: "Administrators sign in to access the full system management dashboard."
+    description: "Secure login for administrators to access the management system."
   },
   {
     id: 13,
     title: "Admin Dashboard",
-    subtitle: "Complete system overview",
+    subtitle: "Overview & Analytics",
     image: adminDashboard,
-    description: "View key metrics, recent orders, sales trends, and system health at a glance."
+    description: "View sales statistics, revenue, order summaries, and best selling items."
   },
   {
     id: 14,
-    title: "Sales Analytics",
-    subtitle: "Track revenue and performance",
+    title: "Inventory Management",
+    subtitle: "Stock control",
     image: adminSales,
-    description: "Monitor daily, weekly, and monthly sales with detailed charts and reports."
+    description: "Check stock levels and add or decrease inventory quantities for all products."
   },
   {
     id: 15,
-    title: "Menu Management",
-    subtitle: "Manage product catalog",
+    title: "Sales Tracking",
+    subtitle: "Performance analysis",
     image: adminMenuManagement,
-    description: "View, edit, and organize all menu items including pricing and availability."
+    description: "Track sales and view sales summary by daily, weekly, and monthly periods."
   },
   {
     id: 16,
-    title: "Add New Product",
-    subtitle: "Create menu items",
-    image: adminAddProduct,
-    description: "Add new products to the menu with details, pricing, and images."
-  },
-  {
-    id: 17,
-    title: "Inventory Management",
-    subtitle: "Track stock levels",
-    image: adminInventory,
-    description: "Monitor inventory levels, low stock alerts, and ingredient availability."
-  },
-  {
-    id: 18,
-    title: "Update Inventory",
-    subtitle: "Adjust stock quantities",
-    image: adminUpdateInventory,
-    description: "Update stock levels and manage inventory replenishment."
-  },
-  {
-    id: 19,
-    title: "User Management",
-    subtitle: "Manage staff and customers",
+    title: "Sales Export",
+    subtitle: "Download reports",
     image: adminUserManagement,
-    description: "Create, edit, and manage user accounts for staff and customer access."
+    description: "Export sales summary in CSV or spreadsheet format for daily, weekly, and monthly reports."
   }
 ];
 
@@ -215,6 +192,24 @@ export default function App() {
         onPrevious={() => paginate(-1)}
         onNext={() => paginate(1)}
       />
+
+      <button
+        onClick={() => paginate(-1)}
+        disabled={currentSlide === 0}
+        className="absolute left-8 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all backdrop-blur-sm"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="w-8 h-8 text-white" />
+      </button>
+
+      <button
+        onClick={() => paginate(1)}
+        disabled={currentSlide === slides.length - 1}
+        className="absolute right-8 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all backdrop-blur-sm"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="w-8 h-8 text-white" />
+      </button>
 
       <div className="absolute top-8 right-8 text-white/80 text-sm bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm">
         {currentSlide + 1} / {slides.length}
