@@ -5,7 +5,6 @@ import { SlideControls } from './components/SlideControls';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import slide1Dark from 'figma:asset/01962370c5547bd530de43592f323d732a6e84c0.png';
-import slide1Light from 'figma:asset/1352e0e6eee956e005b4d72a16c297d46d0c32e5.png';
 import slide2Login from 'figma:asset/79dafcf1619854dca9610d795dd7d48e26f6b729.png';
 import slide3Menu from 'figma:asset/02abd70fb3b961dc4ad395c3b91790e1bed09996.png';
 import slide4Cart from 'figma:asset/dca2dfe41e0aa74576e017c562a7b3d4a3e5d6df.png';
@@ -24,7 +23,15 @@ import adminSales from 'figma:asset/93fa7fb0c7d4ef1e64082c5c647c4b5b06464c4c.png
 import adminMenuManagement from 'figma:asset/5b5771f736db019fd200f273271809fb38f00d62.png';
 import adminUserManagement from 'figma:asset/1d44f2611ed3f2a31af76b992b4c060db9b024f1.png';
 
-const slides = [
+interface SlideData {
+  id: number;
+  title: string;
+  subtitle: string;
+  image: string;
+  description: string;
+}
+
+const slides: SlideData[] = [
   {
     id: 1,
     title: "Welcome to Jesan's Fried Chicken",
@@ -174,7 +181,7 @@ export default function App() {
                 <p className="text-gray-300 max-w-2xl mx-auto">{slides[currentSlide].description}</p>
               </div>
 
-              <div className="flex justify-center">
+              <div className="flex justify-center relative">
                 <img
                   src={slides[currentSlide].image}
                   alt={slides[currentSlide].title}
